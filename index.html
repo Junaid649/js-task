@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+   body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f7f9fc;
+    color: #2e2e2e;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 100vh;
+    margin: 0;
+    padding: 20px;
+}
+
+.container {
+    background-color: #ffffff;
+    padding: 40px 60px;
+    border-radius: 16px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+h1 {
+    color: #4CAF50;
+    margin-bottom: 20px;
+    font-size: 2.5rem;
+}
+
+button {
+    padding: 12px 24px;
+    font-size: 16px;
+    background-color: #4CAF50;
+    color: #ffffff;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+button:hover {
+    background-color: #45a049;
+    transform: translateY(-2px);
+}
+
+</style>
+
+<body>
+    <div class="container">
+        <h1>cat fact</h1>
+        <p>check the console for random cat fact</p>
+        <p>click the button to fetch a new cat fact</p>
+        <button onclick="fetchCatFact()">get new cat fact</button>
+        <h3 id="output"></h3>
+        <img id="dogImage" src="" alt="Random Dog" />
+        
+        <script>
+            let output = document.getElementById("output");
+            let dogImage = document.getElementById("dogImage");
+            const URL = "https://dog.ceo/api/breeds/image/random";
+
+            async function fetchCatFact() {
+                try {
+                    const response = await fetch(URL);
+
+                    if (!response.ok) {
+                        throw new Error("Network response was not ok");
+                    }
+
+                    const data = await response.json();
+                    console.log(data);
+                    dogImage.src = data.message;
+                }
+
+                catch (error) {
+                    console.error("There was a problem with the fetch operation:", error);
+                   
+                }
+            }
+        </script>
+
+    </div>
+
+</body>
+
+</html>
